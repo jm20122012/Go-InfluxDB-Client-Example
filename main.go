@@ -31,7 +31,7 @@ func main() {
 	// a self-signed TLS certificate without using SANs, this throws an error
 	// client := influxdb2.NewClient(influxUrl, influxToken)
 
-	// To skip certificate verification, create the client like this
+	// To skip certificate verification, create the client like this:
 
 	// Create a new TLS configuration with certificate verification disabled
 	// This is not recommended though.  Only use for testing until a new
@@ -62,6 +62,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	// Or write directly line protocol
 	// line := fmt.Sprintf("stat,unit=temperature avg=%f,max=%f", 23.5, 45.0)
 	// err = writeAPI.WriteRecord(context.Background(), line)
@@ -69,26 +70,6 @@ func main() {
 	// 	panic(err)
 	// }
 
-	// Get query client
-	// queryAPI := client.QueryAPI("my-org")
-	// // Get parser flux query result
-	// result, err := queryAPI.Query(context.Background(), `from(bucket:"my-bucket")|> range(start: -1h) |> filter(fn: (r) => r._measurement == "stat")`)
-	// if err == nil {
-	// 	// Use Next() to iterate over query result lines
-	// 	for result.Next() {
-	// 		// Observe when there is new grouping key producing new table
-	// 		if result.TableChanged() {
-	// 			fmt.Printf("table: %s\n", result.TableMetadata().String())
-	// 		}
-	// 		// read result
-	// 		fmt.Printf("row: %s\n", result.Record().String())
-	// 	}
-	// 	if result.Err() != nil {
-	// 		fmt.Printf("Query error: %s\n", result.Err().Error())
-	// 	}
-	// } else {
-	// 	panic(err)
-	// }
 	// Ensures background processes finishes
 	client.Close()
 }
